@@ -7,6 +7,11 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+/**
+ *	Relational Schema for storing data locally 
+ * 
+ *
+ */
 public class Database {
 	
 	public static final String KEY_ROWID = "_id";
