@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" 
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<TextView
+	    android:id="@+id/textView1"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="rUontime? helps you keep track of how punctual you are in a work environment and hopefully helps you get more punctual. The application is easy to use:">
+	    </TextView>
+	<TextView
+	    android:id="@+id/textView2"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="  1. Your next meeting is displayed in the Home screen, with a timer telling you how much time remains. You'll get notified before a certain time that you can choose. When you attend the meeting, just click on the check-in button and scan the QR code.">
+	    
+	</TextView>
+	<TextView
+	    android:id="@+id/textView3"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="  2. In the Statistics screen we provide you with statistics about your punctually during the past meetings.">
+	    
+	</TextView>
+	<TextView
+	    android:id="@+id/textView4"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	   android:text="  3. You can customize the application by clicking on the Settings screen; you can choose whether you want to get notified or not, what time..." >
+	    
+	</TextView>
+
+</LinearLayout>

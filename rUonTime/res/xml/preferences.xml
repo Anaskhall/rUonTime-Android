@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+      <PreferenceCategory 
+        android:title="General Settings"
+        android:key="pref_key_general_settings">
+    
+    	<CheckBoxPreference
+        android:defaultValue="true"
+        android:key="activateService"
+        android:summaryOff="The reminder service is inactive"
+        android:summaryOn="The reminder service is active"
+        android:title="Activate reminder service" />
+    	
+    	<EditTextPreference
+    	 android:title="Reminder"
+    	 android:defaultValue="15"
+    	 android:inputType="number"
+    	 android:key="reminder"
+    	 android:summary="Minutes before reminder"/>
+    	
+    	<CheckBoxPreference
+        android:defaultValue="true"
+        android:key="activateDigest"
+        android:summaryOff="The Digest service is inactive"
+        android:summaryOn="The Digest service is active"
+        android:title="Activate digest service" />
+    	
+    	<ListPreference
+    	    android:title="Digest"
+    	    android:key="digest_list"
+    	    android:summary="Choose an option from the list"
+    	    android:entries="@array/list"
+    	    android:entryValues="@array/lValues"/>"
+    </PreferenceCategory>
+    
+    <PreferenceCategory 
+        android:title="Account Settings"
+        android:key="pref_key_account_settings">
+    	</PreferenceCategory>
+    
+
+</PreferenceScreen>

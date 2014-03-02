@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.android.ruontime"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="18" />
+    <uses-permission android:name="android.permission.READ_CALENDAR"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity android:name=".SplashScreen"
+            android:theme="@style/Theme.NoTitle"  >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"></action>
+                <category android:name="android.intent.category.LAUNCHER"></category>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Ruontime"
+            android:label="@string/app_name" >
+        </activity>      
+        <activity android:name=".Login"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="com.android.ruontime.RUONTIME" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Tabs"
+            android:label="@string/app_name" >
+        </activity> 
+        <activity
+            android:name=".Statistics"
+            android:label="@string/app_name" >
+        </activity> 
+        <activity
+            android:name=".Settings"
+            android:label="@string/app_name" >
+        </activity> 
+        <receiver android:name=".service.Reminder"></receiver>
+        
+		<activity
+    android:name="com.google.zxing.client.android.CaptureActivity"
+    android:configChanges="orientation|keyboardHidden"
+    android:screenOrientation="landscape"
+    android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+    android:windowSoftInputMode="stateAlwaysHidden" >
+    <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+
+        <category android:name="android.intent.category.DEFAULT" />
+    </intent-filter>
+    <intent-filter>
+        <action android:name="com.google.zxing.client.android.SCAN" />
+
+        <category android:name="android.intent.category.DEFAULT" />
+    </intent-filter>
+	</activity>
+	<activity android:name=".About_us" 
+			android:theme="@android:style/Theme.Dialog">
+			<intent-filter>
+				<action android:name="com.android.ruontime.ABOUT" />
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+	</activity>
+	<activity android:name=".Help"
+			android:theme="@android:style/Theme.Dialog">
+			<intent-filter>
+				<action android:name="com.android.ruontime.HELP" />
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+	</activity>
+	<activity android:name="com.android.ruontime.database.SQLView">
+			<intent-filter>
+				<action android:name="com.android.ruontime.SQLVIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+	</activity>
+	<activity
+            android:name=".MyCalendars"
+            android:label="@string/app_name" >
+        </activity> 
+        
+    </application>
+
+</manifest>
