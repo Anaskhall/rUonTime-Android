@@ -8,12 +8,12 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 import org.primefaces.model.DualListModel;
 
 import se.kth.mobdev.ruontime.model.Group;
 import se.kth.mobdev.ruontime.model.User;
-import se.kth.mobdev.ruontime.persistence.PersistenceFactory;
 
 /**
  * @author Jasper
@@ -21,6 +21,7 @@ import se.kth.mobdev.ruontime.persistence.PersistenceFactory;
  */
 
 @ManagedBean(name = "groupsBean")
+@SessionScoped
 public class GroupsBean {
 	
 //	@ManagedProperty(value = "persistence")
@@ -44,6 +45,7 @@ public class GroupsBean {
 	}
 
 	public void setSelectedGroup(Group selectedGroup) {
+		System.out.println("setting selected group: " + selectedGroup);
 		this.selectedGroup = selectedGroup;
 	}
 	
@@ -75,10 +77,14 @@ public class GroupsBean {
 	public void fetchUsersForGroup(){
 		this.showUserlist = true;
 		//extract group members
-		List<User> participants = selectedGroup.getParticipants();
-		this.assignedUsers.setTarget(participants);
+		System.out.println("fetching users for group - the selected group: " + selectedGroup);
+//		List<User> participants = selectedGroup.getParticipants();
+//		System.out.println("participants of group:" + participants);
+//		this.assignedUsers.setTarget(participants);
 		//remove members from list of all members
-		this.assignedUsers.getSource().removeAll(participants);
+//		List<User> source = this.assignedUsers.getSource();
+//		System.out.println("available users:" + participants);
+//		source.removeAll(participants);
 	}
 	
 	public void saveChanges() {

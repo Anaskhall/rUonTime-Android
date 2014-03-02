@@ -37,13 +37,13 @@ public class LoginBean {
 	public void init(){
 		System.out.println("LoginBean created!");
 		//retireve DAO to fetch user from DB
-		IGenericDao<User> userDao = PersistenceFactory.getUserDao();
-		User testUser =  new User("Jas", "H", 22);
-		userDao.save(testUser);
-		System.out.println("persisted user!");
-		
-		List<User> all = userDao.getAll();
-		System.out.println("all users in DB: " + all);
+//		IGenericDao<User> userDao = PersistenceFactory.getUserDao();
+//		User testUser =  new User("Jas", "H", 22);
+//		userDao.save(testUser);
+//		System.out.println("persisted user!");
+//		
+//		List<User> all = userDao.getAll();
+//		System.out.println("all users in DB: " + all);
 	}
 
 	public String login() {  
