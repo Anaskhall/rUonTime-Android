@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<h:body>
+<h:form id="form">  
+	<ui:include src="/include/menu.xhtml" />
+    <p:growl id="growl" showDetail="true" life="3000" />  
+  
+  <h:panelGrid columns="2" cellpadding="5">  
+        <h:panelGrid columns="2" cellpadding="5">  
+        
+        	 <h:outputLabel value="Title: " />  
+            <p:inputText value="#{newMeetingBean.newMeeting.title}"   
+                    id="title" required="true" label="title" />  
+        
+            <h:outputLabel value="Start Time:" />  
+            <p:calendar value="#{newMeetingBean.newMeeting.startsAt}" pattern="MM/dd/yyyy HH:mm" required="true"/>
+            
+            <h:outputLabel value="End Time:" />  
+            <p:calendar value="#{newMeetingBean.newMeeting.startsAt}" pattern="MM/dd/yyyy HH:mm" />
+              
+            <p:commandButton value="create"
+			action="#{newMeetingBean.create}"></p:commandButton>
+              
+            <f:facet name="footer">  
+                <p:commandButton id="submitButton" value="Create" update="growl"   
+                    actionListener="#{newMeetingBean.create}"/>  
+            </f:facet>  
+        </h:panelGrid>  
+        <h:outputLabel value="Select Group: " />
+			<p:selectOneListbox id="scroll" value="#{groupsBean.selectedGroup}"
+				converter="groupConverter" var="p" style="height:200px">
+				<f:selectItems value="#{groupsBean.allGroups}" var="group"
+					itemLabel="#{group.name}" itemValue="#{group}" />
+
+				<p:column>  
+                	#{p.name}   
+            	</p:column>
+			</p:selectOneListbox>
+     </h:panelGrid>    
+</h:form>  
+  
+
+</h:body>
+</html> 

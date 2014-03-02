@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="qualified"
+	targetNamespace="http://www.kth.se/mobdev/wsdl/rUonTimeService_types.xsd">
+
+	<xsd:element name="CheckinDetails">
+		<xsd:complexType>
+			<xsd:all>
+				<xsd:element name="userName" type="xsd:string" />
+				<xsd:element name="groupName" type="xsd:string" />
+				<xsd:element name="meetingId" type="xsd:string" />
+				<xsd:element name="authenticationHash" type="xsd:string" />
+			</xsd:all>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="Group">
+		<xsd:complexType>
+			<xsd:all>
+				<xsd:element name="groupName" type="xsd:string" />
+			</xsd:all>
+		</xsd:complexType>
+	</xsd:element>
+	
+		<xsd:element name="Event">
+		<xsd:complexType>
+			<xsd:all>
+				<xsd:element name="groupName" type="xsd:string" />
+				<xsd:element name="start" type="xsd:dateTime" />
+				<xsd:element name="end" type="xsd:dateTime" />
+			</xsd:all>
+		</xsd:complexType>
+	</xsd:element>
+
+</xsd:schema>

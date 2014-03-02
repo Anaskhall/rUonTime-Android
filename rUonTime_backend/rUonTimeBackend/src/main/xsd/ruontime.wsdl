@@ -1,0 +1,81 @@
+<definitions name="rUonTimeService"
+	targetNamespace="http://www.kth.se/mobdev/wsdl/rUonTimeService.wsdl"
+	xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="http://www.kth.se/mobdev/wsdl/rUonTimeService.wsdl"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+
+	<!-- complex data structures needed for the service -->
+	<types>
+		<schema xmlns="http://www.w3.org/2001/XMLSchema">
+			<import namespace="http://www.kth.se/mobdev/wsdl/rUonTimeService_types.xsd"
+				schemaLocation="types.xsd" />
+		</schema>
+	</types>
+
+
+	<!-- Messages used in communication -->
+	<message name="InitAuthentication">
+		<part name="userName" type="xsd:string" />
+	</message>
+	<message name="AuthenticationChallenge">
+		<part name="challenge" type="xsd:string" />
+	</message>
+
+	<message name="SolveAuthentication">
+		<part name="authHash" type="xsd:string" />
+	</message>
+	<message name="AuthenticationSuccess">
+		<part name="success" type="xsd:boolean" />
+	</message>
+	<message name="AuthenticationFailed">
+		<part name="errorMsg" type="xsd:string" />
+	</message>
+
+	<!-- Port that includes methods -->
+	<portType name="CeckIns_PortType">
+		<operation name="Authentication_Step1">
+			<input message="tns:InitAuthentication" />
+			<output message="tns:AuthenticationChallenge" />
+		</operation>
+		<operation name="Authentication_Step2">
+			<input message="tns:SolveAuthentication" />
+			<output message="tns:AuthenticationSuccess" />
+			<fault name="nmtoken" message="tns:AuthenticationFailed" />
+		</operation>
+	</portType>
+
+	<binding name="rUonTime_Binding" type="tns:CeckIns_PortType">
+		<soap:binding style="rpc"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="Authentication_Step1">
+			<soap:operation soapAction="Authentication_Step1" />
+			<input>
+				<soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+					namespace="urn:kth:ruontimeservice" use="encoded" />
+			</input>
+			<output>
+				<soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+					namespace="urn:kth:ruontimeservice" use="encoded" />
+			</output>
+		</operation>
+		<operation name="Authentication_Step2">
+			<soap:operation soapAction="Authentication_Step2" />
+			<input>
+				<soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+					namespace="urn:kth:ruontimeservice" use="encoded" />
+			</input>
+			<output>
+				<soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+					namespace="urn:kth:ruontimeservice" use="encoded" />
+			</output>
+		</operation>
+	</binding>
+
+	<service name="rUonTime_Service">
+		<documentation>WSDL File for rUonTime_Service</documentation>
+		<port binding="tns:rUonTime_Binding" name="rUonTime_Port">
+			<soap:address location="http://www.kth.se/mobdev/rUonTime" />
+		</port>
+	</service>
+</definitions>
