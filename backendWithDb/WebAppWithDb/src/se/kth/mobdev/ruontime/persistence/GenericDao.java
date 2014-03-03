@@ -27,11 +27,7 @@ public class GenericDao<T extends IEntity> implements IGenericDao<T> {
 	/**
 	 * Default constructor. Use for extend this class.
 	 */
-	// @SuppressWarnings(value = "unchecked")
 	public GenericDao() {
-		// EntityManagerFactory entityManagerFactory =
-		// Persistence.createEntityManagerFactory("dswebapp");
-		// entityManager = entityManagerFactory.createEntityManager();
 		this.sessionFactory = HibernateUtil.getSessionFactory();
 
 	}
@@ -94,9 +90,12 @@ public class GenericDao<T extends IEntity> implements IGenericDao<T> {
 	@Override
 	@SuppressWarnings(value = "unchecked")
 	public List<T> getAll() {
-		Query query = entityManager.createQuery("SELECT e FROM "
-				+ this.tableName + " e");
-		return (List<T>) query.getResultList();
+		Session session = getSession();
+		session.getTransaction().begin();
+		List<T> list = session.createCriteria(clazz).list();
+		session.getTransaction().commit();
+		session.close();
+		return list;
 	}
 
 	/*
@@ -138,30 +137,11 @@ public class GenericDao<T extends IEntity> implements IGenericDao<T> {
 	 */
 	@Override
 	public void delete(T object) throws UnsupportedOperationException {
-		// deleteAll(Arrays.asList(objects), true);
+		Session session = getSession();
+		session.getTransaction().begin();
+		session.delete(object);
+		session.getTransaction().commit();
+		session.close();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see se.kth.mobdev.ruontime.persistence.IGenericDao#refresh(T)
-	 */
-	@Override
-	public void refresh(final T entity) {
-		entityManager.refresh(entity);
-	}
-
-	public void flushAndClear() {
-		entityManager.flush();
-		entityManager.clear();
-	}
-
-	/**
-	 * Get entity manager.
-	 * 
-	 * @return entity manager
-	 */
-	protected EntityManager getEntityManager() {
-		return entityManager;
-	}
 }

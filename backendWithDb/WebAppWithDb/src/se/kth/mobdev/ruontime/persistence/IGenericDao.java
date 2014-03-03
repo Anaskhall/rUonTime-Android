@@ -19,6 +19,4 @@ public interface IGenericDao<T extends IEntity> {
 
 	public abstract void delete(T object) throws UnsupportedOperationException;
 
-	public abstract void refresh(T entity);
-
 }
