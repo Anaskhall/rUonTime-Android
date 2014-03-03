@@ -28,15 +28,6 @@ private String tableName;
 	  EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("dswebapp");
 	   entityManager = entityManagerFactory.createEntityManager();
 
-//    Type[] types = ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments();
-//
-//    if (types[0] instanceof ParameterizedType) {
-//      // If the class has parameterized types, it takes the raw type.
-//      ParameterizedType type = (ParameterizedType) types[0];
-//      clazz = (Class<T>) type.getRawType();
-//    } else {
-//      clazz = (Class<T>) types[0];
-//    }
   }
 
   /**
