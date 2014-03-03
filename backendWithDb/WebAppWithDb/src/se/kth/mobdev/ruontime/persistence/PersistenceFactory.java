@@ -14,13 +14,13 @@ import se.kth.mobdev.ruontime.persistence.model.User;
  */
 public class PersistenceFactory {
 	
-	private static IGenericDao<Group> groupDao = new GenericDao<Group>();
+	private static IGenericDao<Group> groupDao = new GenericDao<Group>(Group.class);
 	
-	private static IGenericDao<User> userDao = new GenericDao<User>();
+	private static IGenericDao<User> userDao = new GenericDao<User>(User.class);
 //	
-	private static IGenericDao<Meeting> meetingDao = new GenericDao<Meeting>();
+	private static IGenericDao<Meeting> meetingDao = new GenericDao<Meeting>(Meeting.class);
 //	
-	private static IGenericDao<CheckIn> checkinDao = new GenericDao<CheckIn>();
+	private static IGenericDao<CheckIn> checkinDao = new GenericDao<CheckIn>(CheckIn.class);
 
 	public static IGenericDao<Group> getGroupDao() {
 		return groupDao;

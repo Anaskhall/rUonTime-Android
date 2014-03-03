@@ -28,20 +28,23 @@ public class Demo {
         user.setFirstName("Yo");  
         user.setLastName("Mama");
         user.setPwHash("sss");
-        user = PersistenceFactory.getUserDao().save(user);
+//        user = PersistenceFactory.getUserDao().save(user);
 
         
         CheckIn checkin = new CheckIn(user, GregorianCalendar.getInstance(), 3, false, false);
-        PersistenceFactory.getCheckinDao().save(checkin);
+//        PersistenceFactory.getCheckinDao().save(checkin);
         
         Group group = new Group("new group" + Math.random(), user);
         group.addParticipant(new User("user1", "donald", "duck", "aaa"));
         group.addParticipant(new User("user2", "darth", "vader", "aaa"));
         
-        group = PersistenceFactory.getGroupDao().save(group);
+//        group = PersistenceFactory.getGroupDao().save(group);
        Meeting meet = new Meeting();
        meet.Meeting("awsm meeting" + Math.random(), group, GregorianCalendar.getInstance(), GregorianCalendar.getInstance());
 
-       PersistenceFactory.getMeetingDao().save(meet);
+//       PersistenceFactory.getMeetingDao().save(meet);
+       System.out.println("getting all groups: " + PersistenceFactory.getGroupDao().getAll());
+       System.out.println("getting all users: " + PersistenceFactory.getUserDao().getAll());
+       System.out.println("getting all meeting: " + PersistenceFactory.getMeetingDao().getAll());
     }  
 }  

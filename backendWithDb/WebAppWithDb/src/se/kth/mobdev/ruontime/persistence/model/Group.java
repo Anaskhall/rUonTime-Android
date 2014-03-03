@@ -60,6 +60,7 @@ public class Group implements IEntity{
 					nullable = false, updatable = false) })
 	private List<Meeting> meetings;
 	
+	public Group() {};
 	
 	public Group(String name, User supervisor) {
 		this.name = name;

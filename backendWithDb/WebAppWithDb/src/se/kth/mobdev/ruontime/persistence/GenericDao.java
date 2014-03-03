@@ -44,6 +44,7 @@ public class GenericDao<T extends IEntity> implements IGenericDao<T> {
 	 *            class with will be accessed by DAO methods
 	 */
 	public GenericDao(Class<T> clazz) {
+		this.sessionFactory = HibernateUtil.getSessionFactory();
 		this.clazz = clazz;
 	}
 
