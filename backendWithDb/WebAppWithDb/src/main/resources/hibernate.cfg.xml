@@ -5,9 +5,12 @@
 <hibernate-configuration>
 	<session-factory>
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="hibernate.connection.username">root</property>
-		<property name="hibernate.connection.password">1234</property>
-		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/hibnatedb?zeroDateTimeBehavior=convertToNull</property>
+<!-- 		<property name="hibernate.connection.username">root</property> -->
+<!-- 		<property name="hibernate.connection.password">1234</property> -->
+<!-- 		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/hibnatedb?zeroDateTimeBehavior=convertToNull</property> -->
+		<property name="hibernate.connection.username">RuonTime</property>
+		<property name="hibernate.connection.password">ruontime</property>
+		<property name="hibernate.connection.url">jdbc:mysql://130.229.129.70:3306/webservice?zeroDateTimeBehavior=convertToNull</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLInnoDBDialect</property>
 		<property name="show_sql">true</property>
 		<property name="connection.pool_size">1</property>

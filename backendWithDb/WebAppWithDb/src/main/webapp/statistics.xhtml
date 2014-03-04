@@ -13,9 +13,9 @@
 
 		<ui:include src="/include/menu.xhtml" />
 		<p:growl id="growl" />
-<br/>
-		<p:dataTable id="dataTable" var="user" value="#{statisticsBean.allUsers}"
-			paginator="true" rows="10"
+		<br />
+		<p:dataTable id="dataTable" var="user"
+			value="#{statisticsBean.allUsers}" paginator="true" rows="10"
 			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 			rowsPerPageTemplate="5,10,15">
 			<f:facet name="header">  
@@ -42,9 +42,50 @@
 				</f:facet>
 				<h:outputText value="#{user.lastName}" />
 			</p:column>
-
+			<p:column style="width:4%">
+				<p:commandButton id="selectButton" update=":form:display"
+					oncomplete="PF('editDialog').show()" icon="ui-icon-edit"
+					title="View">
+					<f:setPropertyActionListener value="#{user}"
+						target="#{statisticsBean.selectedUser}" />
+				</p:commandButton>
+			</p:column>
 		</p:dataTable>
+		<p:dialog header="User Statistics" widgetVar="editDialog" resizable="false"
+			id="carDlg" showEffect="fade" hideEffect="explode" modal="true">
 
+			<h:panelGrid id="display" columns="2" cellpadding="4"
+				style="margin:0 auto;">
+
+
+				<h:outputText value="User" />
+				<h:outputText value="#{statisticsBean.selectedUser.userName}"
+					style="font-weight:bold" />
+
+				<h:outputText value="Name:" />
+				<h:outputText value="#{statisticsBean.selectedUser.fullName}"
+					style="font-weight:bold" />
+					
+				<h:outputText value="Aggregated Late: " />
+				<h:outputText value="#{statisticsBean.stats.aggregatedLate}"
+					style="font-weight:bold" />
+					
+				<h:outputText value="Average Late: " />
+				<h:outputText value="#{statisticsBean.stats.avgLate}"
+					style="font-weight:bold" />
+					
+				<h:outputText value="First to show up (times): " />
+				<h:outputText value="#{statisticsBean.stats.noOfFirst}"
+					style="font-weight:bold" />
+					
+				<h:outputText value="Last to show up (times): " />
+				<h:outputText value="#{statisticsBean.stats.noOfLast}"
+					style="font-weight:bold" />
+
+
+			</h:panelGrid>
+
+		</p:dialog>
 	</h:form>
 
 

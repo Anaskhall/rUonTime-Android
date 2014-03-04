@@ -18,6 +18,8 @@ import org.primefaces.context.RequestContext;
 import se.kth.mobdev.ruontime.persistence.IGenericDao;
 import se.kth.mobdev.ruontime.persistence.PersistenceFactory;
 import se.kth.mobdev.ruontime.persistence.model.User;
+import se.kth.mobdev.ruontime.service.ServiceFactory;
+import se.kth.mobdev.ruontime.service.UserAuthenticationService;
 
 /**
  * @author Jasper
@@ -53,19 +55,19 @@ public class LoginBean implements Serializable{
         RequestContext context = RequestContext.getCurrentInstance();  
         FacesMessage msg = null;  
         boolean loggedIn = false;  
-          
-        if(username != null  && username.equals("admin") && pw != null  && pw.equals("admin")) {  
-            loggedIn = true;  
+        UserAuthenticationService userAuthService = ServiceFactory.getUserAuthService();
+        loggedIn = userAuthService.login(username, pw);
+        if(loggedIn) {  
+        	loggedInUser = userAuthService.getUser(username);
             msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome ", username);  
         } else {  
-            loggedIn = false;  
             msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error", "Invalid username/password combination");  
         }  
           
         FacesContext.getCurrentInstance().addMessage(null, msg);  
         context.addCallbackParam("loggedIn", loggedIn);
         
-        this.setLoggedInUser(new User("q", "A", "B", "20"));
+        this.setLoggedInUser(loggedInUser);
         
         return "welcome.xhtml";
         

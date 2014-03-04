@@ -96,6 +96,7 @@ public class GenericDao<T extends IEntity> implements IGenericDao<T> {
 		List<T> list = session.createCriteria(clazz).list();
 		session.getTransaction().commit();
 		session.close();
+//		System.out.println("fetched " + list.size() + " items from " + clazz.getName());
 		return list;
 	}
 

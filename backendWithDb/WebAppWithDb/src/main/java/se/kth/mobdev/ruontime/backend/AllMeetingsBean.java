@@ -9,7 +9,9 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 
+import se.kth.mobdev.ruontime.persistence.PersistenceFactory;
 import se.kth.mobdev.ruontime.persistence.model.CheckIn;
+import se.kth.mobdev.ruontime.persistence.model.Meeting;
 import se.kth.mobdev.ruontime.persistence.model.User;
 
 
@@ -18,24 +20,17 @@ import se.kth.mobdev.ruontime.persistence.model.User;
  *
  */
 
-@ManagedBean(name = "statisticsBean")
+@ManagedBean(name = "allMeetingsBean")
 public class AllMeetingsBean {
 	
-	private List<User> allUsers;
+	private List<Meeting> allMeetings;
 	
 	private List<CheckIn> checkIns;
 	
-	public void selectUSer(){
+	public void selectUser(){
 		//load statistics for selected user
 	}
 
-	public List<User> getAllUsers() {
-		return allUsers;
-	}
-
-	public void setAllUsers(List<User> allUsers) {
-		this.allUsers = allUsers;
-	}
 
 	public List<CheckIn> getCheckIns() {
 		return checkIns;
@@ -48,10 +43,15 @@ public class AllMeetingsBean {
 	@PostConstruct
 	private void init(){
 		//gather user data from DB
-		this.allUsers =  new ArrayList<User>();
-		allUsers.add(new User("user1", "firstName", "lastName", "aaa"));
-		allUsers.add(new User("user45", "aa", "ss", "13"));
-		allUsers.add(new User("aaa", "cc", "ee", "31"));
+		this.allMeetings =  PersistenceFactory.getMeetingDao().getAll();
+	}
+
+	public List<Meeting> getAllMeetings() {
+		return allMeetings;
+	}
+
+	public void setAllMeetings(List<Meeting> allMeetings) {
+		this.allMeetings = allMeetings;
 	}
 	
 	

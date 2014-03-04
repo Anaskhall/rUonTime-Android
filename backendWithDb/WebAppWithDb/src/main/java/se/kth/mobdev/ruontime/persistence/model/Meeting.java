@@ -5,6 +5,7 @@ package se.kth.mobdev.ruontime.persistence.model;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -18,6 +19,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import se.kth.mobdev.ruontime.persistence.IEntity;
 
@@ -37,7 +42,7 @@ public class Meeting implements IEntity{
 	private Integer id;
 
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "meeting_group", joinColumns = { 
 			@JoinColumn(name = "group_id", nullable = false, updatable = false) }, 
 			inverseJoinColumns = { @JoinColumn(name = "meeting_id", 
@@ -50,7 +55,8 @@ public class Meeting implements IEntity{
 	
 	private Calendar endsAt;
 	 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "meeting_user", joinColumns = { 
 			@JoinColumn(name = "user_id", nullable = false, updatable = false) }, 
 			inverseJoinColumns = { @JoinColumn(name = "meeting_id", 
@@ -110,6 +116,12 @@ public class Meeting implements IEntity{
 	public Calendar getStartsAt() {
 		return startsAt;
 	}
+	
+	@Transient
+	public Date getStartsAtJsf() {
+		
+		return startsAt != null ? startsAt.getTime() : null;
+	}
 
 	public void setStartsAt(Calendar startsAt) {
 		this.startsAt = startsAt;
@@ -117,6 +129,11 @@ public class Meeting implements IEntity{
 
 	public Calendar getEndsAt() {
 		return endsAt;
+	}
+	
+	@Transient
+	public Date getEndsAtJsf() {
+		return endsAt != null ? endsAt.getTime() : null;
 	}
 
 	public void setEndsAt(Calendar endsAt) {

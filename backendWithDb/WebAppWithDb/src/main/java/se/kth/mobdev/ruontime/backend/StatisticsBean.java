@@ -11,8 +11,11 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 
+import se.kth.mobdev.ruontime.model.Statistics;
+import se.kth.mobdev.ruontime.persistence.PersistenceFactory;
 import se.kth.mobdev.ruontime.persistence.model.CheckIn;
 import se.kth.mobdev.ruontime.persistence.model.User;
+import se.kth.mobdev.ruontime.service.ServiceFactory;
 
 /**
  * @author Jasper
@@ -26,7 +29,11 @@ public class StatisticsBean {
 	
 	private List<CheckIn> checkIns;
 	
-	public void selectUSer(){
+	private User selectedUser;
+	
+	private Statistics stats;
+	
+	public void selectUser(){
 		//load statistics for selected user
 	}
 
@@ -49,10 +56,28 @@ public class StatisticsBean {
 	@PostConstruct
 	private void init(){
 		//gather user data from DB
-		this.allUsers =  new ArrayList<User>();
-		allUsers.add(new User("user1", "firstName", "lastName", "aaa"));
-		allUsers.add(new User("user45", "aa", "ss", "13"));
-		allUsers.add(new User("aaa", "cc", "ee", "31"));
+		this.allUsers =  PersistenceFactory.getUserDao().getAll();
+	}
+
+	public User getSelectedUser() {
+		return selectedUser;
+	}
+
+	public void setSelectedUser(User selectedUser) {
+		this.selectedUser = selectedUser;
+		loadStatistics();
+	}
+
+	private void loadStatistics() {
+		this.stats = ServiceFactory.getStatisticsService().getUserStatistics(selectedUser);
+	}
+
+	public Statistics getStats() {
+		return stats;
+	}
+
+	public void setStats(Statistics stats) {
+		this.stats = stats;
 	}
 	
 	

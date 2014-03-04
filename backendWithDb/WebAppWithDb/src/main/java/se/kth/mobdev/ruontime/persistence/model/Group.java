@@ -19,6 +19,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import se.kth.mobdev.ruontime.persistence.IEntity;
 
 /**
@@ -39,21 +42,24 @@ public class Group implements IEntity{
 	@Column(name ="groupname")
 	private String name;
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@ManyToMany( cascade = CascadeType.ALL)
 	@JoinTable(name = "supervisors", joinColumns = { 
 			@JoinColumn(name = "user_id", nullable = false, updatable = false) }, 
 			inverseJoinColumns = { @JoinColumn(name = "group_id", 
 					nullable = false, updatable = false) })
 	private List<User> supervisors;
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "group_user", joinColumns = { 
 			@JoinColumn(name = "user_id", nullable = false, updatable = false) }, 
 			inverseJoinColumns = { @JoinColumn(name = "group_id", 
 					nullable = false, updatable = false) })
 	private List<User> participants;
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "meeting_group", joinColumns = { 
 			@JoinColumn(name = "group_id", nullable = false, updatable = false) }, 
 			inverseJoinColumns = { @JoinColumn(name = "meeting_id", 
@@ -118,10 +124,6 @@ public class Group implements IEntity{
 		this.meetings.remove(meeting);
 	}
 	
-	public String toString(){
-		return this.name;
-	}
-
 	@Override
 	public Integer getId() {
 		return this.id;
@@ -134,6 +136,15 @@ public class Group implements IEntity{
 
 	public void setParticipants(List<User> participants) {
 		this.participants = participants;
+	}
+	
+	public boolean equals(Object o) {
+		if(o instanceof Group) {
+			if(((Group)o).getName() != null){
+				return ((Group)o).getName().equals(name);
+			}
+		}
+		return false;
 	}
 	
 }

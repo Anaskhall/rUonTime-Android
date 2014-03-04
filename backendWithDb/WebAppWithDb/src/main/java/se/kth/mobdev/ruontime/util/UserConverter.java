@@ -12,6 +12,7 @@ import org.primefaces.component.picklist.PickList;
 import org.primefaces.model.DualListModel;
 
 import se.kth.mobdev.ruontime.persistence.model.User;
+import se.kth.mobdev.ruontime.service.ServiceFactory;
 
 /**
  * @author Jasper
@@ -22,25 +23,7 @@ public class UserConverter implements Converter {
 		@Override
 		public Object getAsObject(FacesContext arg0, UIComponent arg1, String arg2) {
 		    Object ret = null;
-		    if (arg1 instanceof PickList) {
-		        Object dualList = ((PickList) arg1).getValue();
-		        DualListModel dl = (DualListModel) dualList;
-		        for (Object o : dl.getSource()) {
-		            String id = "" + ((User) o).getUserName();
-		            if (arg2.equals(id)) {
-		                ret = o;
-		                break;
-		            }
-		        }
-		        if (ret == null)
-		            for (Object o : dl.getTarget()) {
-		                String id = "" + ((User) o).getUserName();
-		                if (arg2.equals(id)) {
-		                    ret = o;
-		                    break;
-		                }
-		            }
-		    }
+		    ret = ServiceFactory.getUserAuthService().getUser(arg2);
 		    return ret;
 		}
 

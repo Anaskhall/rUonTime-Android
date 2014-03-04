@@ -16,14 +16,14 @@ import se.kth.mobdev.ruontime.persistence.model.User;
  */
 public class UserDao extends GenericDao<User> {
 
-	public UserDao(Class<User> class1) {
+	public UserDao() {
 
-		super(class1);
+		super(User.class);
 	}
 
 	public User findByName(String username) {
 		//query as string
-		String queryString = " from user as u where u.name = :name";
+		String queryString = " from User as u where u.userName = :name";
 		
 		Session session = getSession();
 		session.getTransaction().begin();

@@ -4,14 +4,20 @@
 package se.kth.mobdev.ruontime.backend;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 
+import se.kth.mobdev.ruontime.persistence.IGenericDao;
 import se.kth.mobdev.ruontime.persistence.PersistenceFactory;
 import se.kth.mobdev.ruontime.persistence.model.Group;
 import se.kth.mobdev.ruontime.persistence.model.Meeting;
+import se.kth.mobdev.ruontime.util.CalendarHelper;
 
 /**
  * @author Jasper
@@ -19,9 +25,14 @@ import se.kth.mobdev.ruontime.persistence.model.Meeting;
  */
 
 @ManagedBean(name = "newMeetingBean")
+@ViewScoped
 public class NewMeetingBean {
 
 	private Meeting newMeeting;
+	
+	private Date startsAt;
+	
+	private Date endsAt;
 	
 	private List<Group> allGroups;
 
@@ -29,7 +40,11 @@ public class NewMeetingBean {
 	
 	public String create(){
 		newMeeting.addAssociatedGroup(selectedGroup);
-		//store.createNewMeeting(newMeeting);
+		newMeeting.setStartsAt(CalendarHelper.DateToCalendar(startsAt));
+		newMeeting.setEndsAt(CalendarHelper.DateToCalendar(endsAt));
+		IGenericDao<Meeting> meetingDao = PersistenceFactory.getMeetingDao();
+		newMeeting = meetingDao.save(newMeeting);
+		System.out.println("created new meeting: " + newMeeting + " for group " + selectedGroup);
 		return "welcome.xhtml";
 	}
 
@@ -51,17 +66,10 @@ public class NewMeetingBean {
 	
 	@PostConstruct
 	public void init(){
+		newMeeting = new Meeting();
 		//fetch all Groups from DataBase
-		//allGroups = PersistenceFactory.getGroupDao().getAll();
+		allGroups = PersistenceFactory.getGroupDao().getAll();
 		
-		//FIXME, TESTING ONLY
-		allGroups = new ArrayList<Group>();
-		allGroups.add(new Group("group 1", null));
-		allGroups.add(new Group("group 2", null));
-		allGroups.add(new Group("group 3", null));
-		Group group4 = new Group("group 4", null);
-		setSelectedGroup(group4);
-		allGroups .add(group4);
 	}
 
 	public Group getSelectedGroup() {
@@ -70,6 +78,22 @@ public class NewMeetingBean {
 
 	public void setSelectedGroup(Group selectedGroup) {
 		this.selectedGroup = selectedGroup;
+	}
+
+	public Date getStartsAt() {
+		return startsAt;
+	}
+
+	public void setStartsAt(Date startsAt) {
+		this.startsAt = startsAt;
+	}
+
+	public Date getEndsAt() {
+		return endsAt;
+	}
+
+	public void setEndsAt(Date endsAt) {
+		this.endsAt = endsAt;
 	}
 	
 	

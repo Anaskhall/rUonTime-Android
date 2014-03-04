@@ -11,6 +11,7 @@ import javax.faces.convert.FacesConverter;
 import org.primefaces.component.picklist.PickList;
 import org.primefaces.model.DualListModel;
 
+import se.kth.mobdev.ruontime.persistence.PersistenceFactory;
 import se.kth.mobdev.ruontime.persistence.model.Group;
 
 /**
@@ -22,25 +23,8 @@ public class GroupConverter implements Converter {
 		@Override
 		public Object getAsObject(FacesContext arg0, UIComponent arg1, String arg2) {
 		    Object ret = null;
-		    if (arg1 instanceof PickList) {
-		        Object dualList = ((PickList) arg1).getValue();
-		        DualListModel dl = (DualListModel) dualList;
-		        for (Object o : dl.getSource()) {
-		            String id = "" + ((Group) o).getName();
-		            if (arg2.equals(id)) {
-		                ret = o;
-		                break;
-		            }
-		        }
-		        if (ret == null)
-		            for (Object o : dl.getTarget()) {
-		                String id = "" + ((Group) o).getName();
-		                if (arg2.equals(id)) {
-		                    ret = o;
-		                    break;
-		                }
-		            }
-		    }
+		    ret = PersistenceFactory.getGroupDao().findByName(arg2);
+		    System.out.println("converted " + arg2 + " to " + ret);
 		    return ret;
 		}
 

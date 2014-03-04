@@ -14,33 +14,33 @@
 		<ui:include src="/include/menu.xhtml" />
 		<p:growl id="growl" />
 <br/>
-		<p:dataTable id="dataTable" var="user" value="#{statisticsBean.allUsers}"
+		<p:dataTable id="dataTable" var="meeting" value="#{allMeetingsBean.allMeetings}"
 			paginator="true" rows="10"
 			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 			rowsPerPageTemplate="5,10,15">
 			<f:facet name="header">  
-           Select User for which you would like to access statistics
+           Select Meeting for which you would like to see details
         </f:facet>
 
 			<p:column>
 				<f:facet name="header">
-					<h:outputText value="username" />
+					<h:outputText value="Meeting name" />
 				</f:facet>
-				<h:outputText value="#{user.userName}" />
+				<h:outputText value="#{meeting.title}" />
 			</p:column>
 
 			<p:column>
 				<f:facet name="header">
-					<h:outputText value="First Name" />
+					<h:outputText value="Starts At" />
 				</f:facet>
-				<h:outputText value="#{user.firstName}" />
+				<h:outputText value="#{meeting.startsAtJsf}" />
 			</p:column>
 
 			<p:column>
 				<f:facet name="header">
-					<h:outputText value="Last Name" />
+					<h:outputText value="Ends At" />
 				</f:facet>
-				<h:outputText value="#{user.lastName}" />
+				<h:outputText value="#{meeting.endsAtJsf}" />
 			</p:column>
 
 		</p:dataTable>
