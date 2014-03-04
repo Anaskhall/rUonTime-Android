@@ -22,13 +22,12 @@
                     id="username" required="true" label="username" />  
               
             <h:outputLabel for="password" value="Password:" />  
-            <h:inputSecret value="#{loginBean.pw}"   
+            <p:password value="#{loginBean.pw}"   
                     id="password" required="true" label="password" />  
               
             <f:facet name="footer">  
                 <p:commandButton id="loginButton" value="Login" update="growl"   
-                    action="#{loginBean.login}"   
-                    oncomplete="handleLoginRequest(xhr, status, args)"/>  
+                    action="#{loginBean.login}"  />  
             </f:facet>  
         </h:panelGrid>  
           

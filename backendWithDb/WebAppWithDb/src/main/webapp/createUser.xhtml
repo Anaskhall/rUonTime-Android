@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<h:body>
+	<h:form id="form">
+		<ui:include src="/include/menu.xhtml" />
+		<p:growl id="growl" showDetail="true" life="3000" />
+		<h:outputLabel value="Create a new User" />
+		<h:panelGrid columns="2" cellpadding="5">
+			<h:panelGrid columns="2" cellpadding="5">
+
+				<h:outputLabel value="username: " />
+				<p:inputText value="#{creationBean.newUser.userName}"	required="true" />
+
+				<h:outputLabel value="First Name:" />
+				<p:inputText value="#{creationBean.newUser.firstName}"
+					required="true" />
+
+				<h:outputLabel value="Last Name:" />
+				<p:inputText value="#{creationBean.newUser.lastName}"
+					required="true"  />
+					
+				<h:outputLabel value="Initial Password:" />
+				<p:password value="#{creationBean.newUser.pwHash}" 
+					required="true" feedback="true"/>
+
+				<f:facet name="footer">
+					<p:commandButton id="submitButton" value="Create" update="growl"
+						action="#{creationBean.createUser}" />
+				</f:facet>
+			</h:panelGrid>
+		</h:panelGrid>
+	</h:form>
+
+
+</h:body>
+</html>

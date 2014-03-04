@@ -60,17 +60,19 @@ public class GroupsBean {
 	@PostConstruct
 	public void init(){
 		//fetch all Groups from DataBase
-		this.showUserlist = false;
+		this.showUserlist = true;
 		
 		//FIXME, TESTING ONLY
 //		allGroups = ServiceFactory.getGroupService().getAllGroups(this.loginBean.getLoggedInUser());
 		allGroups = PersistenceFactory.getGroupDao().getAll();
 		
 		List<User> source = PersistenceFactory.getUserDao().getAll();
+		System.out.println("availale users: " + source);
 		this.allUsers = source;
 		List<User> target = new ArrayList<User>();
 		if(!allGroups.isEmpty()) {
-			target  = allGroups.get(0).getParticipants();
+			selectedGroup = allGroups.get(0);
+			target  = selectedGroup.getParticipants();
 		}
 		this.setAssignedUsers(new DualListModel<User>(source, target )); 
 		

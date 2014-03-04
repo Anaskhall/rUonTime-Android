@@ -4,6 +4,7 @@ se\kth\mobdev\ruontime\util\GroupConverter.class
 se\kth\mobdev\ruontime\persistence\IGenericDao.class
 se\kth\mobdev\ruontime\demo\Demo.class
 se\kth\mobdev\ruontime\service\GroupService.class
+se\kth\mobdev\ruontime\backend\CreationBean.class
 se\kth\mobdev\ruontime\service\ServiceFactory.class
 se\kth\mobdev\ruontime\util\UserConverter.class
 se\kth\mobdev\ruontime\persistence\HibernateUtil.class

@@ -12,20 +12,21 @@
 	<h:form id="form">
 
 		<ui:include src="/include/menu.xhtml" />
-		<p:growl id="growl" />
+		<p:growl id="messages" />
 
 		<h:panelGrid columns="3" cellpadding="5">
 			<h:outputLabel value="Select Group: " />
 			<p:selectOneListbox id="scroll" value="#{groupsBean.selectedGroup}"
-				converter="groupConverter" var="p" style="height:200px" > 
+				converter="groupConverter" var="p" style="height:200px">
 				<f:selectItems value="#{groupsBean.allGroups}" var="group"
 					itemLabel="#{group.name}" itemValue="#{group}" />
-		    <p:ajax update="pojoPickList" listener="#{groupsBean.fetchUsersForGroup()}"/>
+				<p:ajax update="pojoPickList"
+					listener="#{groupsBean.fetchUsersForGroup()}" />
 				<p:column>  
                 	#{p.name}   
             	</p:column>
 			</p:selectOneListbox>
- 			
+
 
 			<h:outputLabel value="Users: " />
 
@@ -48,17 +49,24 @@
 
 
 			<f:facet name="footer">
-				<p:commandButton id="submitButton" value="Save Changes" update="form"
-					actionListener="#{groupsBean.saveChanges}" />
-				<p:commandButton id="deleteGroupButton" value="Delete Group" update="form"
- 					actionListener="#{groupsBean.deleteGroup}" >
- 				<p:confirm header="Confirmation" message="Are you sure you want to delete this group??" icon="ui-icon-alert" />  
- 			</p:commandButton>
+				<p:commandButton id="submitButton" value="Save Changes"
+					update="form" actionListener="#{groupsBean.saveChanges}" />
+				<p:commandButton id="deleteGroupButton" value="Delete Group"
+					update="form" actionListener="#{groupsBean.deleteGroup}">
+					<p:confirm header="Confirmation"
+						message="Are you sure you want to delete this group??"
+						icon="ui-icon-alert" />
+				</p:commandButton>
+				<br />
+				<p:button value="New User" outcome="createUser" />
+				<p:button value="New Group" outcome="createGroup" />
 			</f:facet>
-			<p:confirmDialog global="true" showEffect="fade" hideEffect="explode">  
-        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>  
-        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>       
-    </p:confirmDialog>  
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+				<p:commandButton value="Yes" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="No" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
 		</h:panelGrid>
 	</h:form>
 

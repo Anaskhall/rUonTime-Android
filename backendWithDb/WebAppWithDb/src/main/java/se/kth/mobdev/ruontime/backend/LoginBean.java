@@ -4,19 +4,15 @@
 package se.kth.mobdev.ruontime.backend;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 
 import org.primefaces.context.RequestContext;
 
-import se.kth.mobdev.ruontime.persistence.IGenericDao;
-import se.kth.mobdev.ruontime.persistence.PersistenceFactory;
 import se.kth.mobdev.ruontime.persistence.model.User;
 import se.kth.mobdev.ruontime.service.ServiceFactory;
 import se.kth.mobdev.ruontime.service.UserAuthenticationService;
@@ -60,16 +56,18 @@ public class LoginBean implements Serializable{
         if(loggedIn) {  
         	loggedInUser = userAuthService.getUser(username);
             msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome ", username);  
+            FacesContext.getCurrentInstance().addMessage(null, msg);  
+            context.addCallbackParam("loggedIn", loggedIn);
+            
+            this.setLoggedInUser(loggedInUser);
+            
+            return "welcome.xhtml";
         } else {  
-            msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error", "Invalid username/password combination");  
+            msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error", "Invalid username/password combination");
+            FacesContext.getCurrentInstance().addMessage(null, msg);  
+            return "login.xhtml";
         }  
           
-        FacesContext.getCurrentInstance().addMessage(null, msg);  
-        context.addCallbackParam("loggedIn", loggedIn);
-        
-        this.setLoggedInUser(loggedInUser);
-        
-        return "welcome.xhtml";
         
     }	
 	
