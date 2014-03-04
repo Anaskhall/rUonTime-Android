@@ -16,7 +16,7 @@ public class PersistenceFactory {
 	
 	private static IGenericDao<Group> groupDao = new GenericDao<Group>(Group.class);
 	
-	private static IGenericDao<User> userDao = new GenericDao<User>(User.class);
+	private static UserDao userDao = new UserDao(User.class);
 //	
 	private static IGenericDao<Meeting> meetingDao = new GenericDao<Meeting>(Meeting.class);
 //	
@@ -26,7 +26,7 @@ public class PersistenceFactory {
 		return groupDao;
 	}
 
-	public static IGenericDao<User> getUserDao() {
+	public static UserDao getUserDao() {
 		return userDao;
 	}
 

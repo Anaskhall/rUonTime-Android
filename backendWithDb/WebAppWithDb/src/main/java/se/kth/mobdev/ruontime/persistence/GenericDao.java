@@ -32,7 +32,7 @@ public class GenericDao<T extends IEntity> implements IGenericDao<T> {
 
 	}
 
-	private Session getSession() {
+	protected Session getSession() {
 		return sessionFactory.openSession();
 	}
 

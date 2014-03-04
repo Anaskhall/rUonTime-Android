@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<h:body>
+	<h:form id="form">
+
+		<ui:include src="/include/menu.xhtml" />
+		<p:growl id="growl" />
+
+		<h:panelGrid columns="2" cellpadding="5">
+			<h:outputLabel value="Select Group: " />
+			<p:selectOneListbox id="scroll" value="#{groupsBean.selectedGroup}"
+				converter="groupConverter" var="p" style="height:200px" > 
+				<f:selectItems value="#{groupsBean.allGroups}" var="group"
+					itemLabel="#{group.name}" itemValue="#{group}" />
+		    <p:ajax update="pojoPickList" listener="#{groupsBean.fetchUsersForGroup}"/>
+				<p:column>  
+                	#{p.name}   
+            	</p:column>
+			</p:selectOneListbox>
+
+			<h:outputLabel value="Users: " />
+
+			<p:pickList id="pojoPickList" value="#{groupsBean.assignedUsers}"
+				var="group" effect="bounce" itemValue="#{user}"
+				itemLabel="#{user.fullName}" converter="userConverter"
+				showSourceControls="true" showTargetControls="true"
+				showCheckbox="true" showSourceFilter="true" showTargetFilter="true"
+				filterMatchMode="contains" rendered="#{groupsBean.showUserlist}">
+
+				<f:facet name="sourceCaption">Available</f:facet>
+				<f:facet name="targetCaption">To Edit</f:facet>
+
+				<p:column>  
+            			#{user.name}  
+        			</p:column>
+
+			</p:pickList>
+
+
+
+			<f:facet name="footer">
+				<p:commandButton id="submitButton" value="Save Changes" update="form"
+					actionListener="#{groupsBean.saveChanges}" />
+			</f:facet>
+		</h:panelGrid>
+	</h:form>
+
+	<script type="text/javascript">
+		
+	</script>
+
+</h:body>
+</html>

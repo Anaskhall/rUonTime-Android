@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;  
 import javax.persistence.Id;  
 import javax.persistence.Table;  
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import se.kth.mobdev.ruontime.persistence.IEntity;
@@ -77,6 +78,9 @@ public class User implements IEntity{
 		this.pwHash = pwHash;
 	}  
       
-        //Here you need to generate getters and setters  
+	@Transient
+    public String getFullName(){
+    	return this.firstName + " " + lastName;
+    }
   
 } 
