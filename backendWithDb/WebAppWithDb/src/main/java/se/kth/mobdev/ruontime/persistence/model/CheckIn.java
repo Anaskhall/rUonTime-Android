@@ -45,6 +45,9 @@ public class CheckIn implements IEntity{
 	@Column(name = "LastToShow")
 	private boolean lastToShowUp;
 	
+	public CheckIn() {
+		
+	}
 
 	public CheckIn(User associatedUser, Calendar timestamp, int minutesLate,
 			boolean firstToShowUp, boolean lastToShowUp) {

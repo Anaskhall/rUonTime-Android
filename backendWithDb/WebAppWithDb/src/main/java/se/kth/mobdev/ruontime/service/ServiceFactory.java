@@ -13,7 +13,7 @@ public class ServiceFactory {
 
 	private static GroupService groupService = new GroupService();
 	
-	private static StatisticsService statisticsService;
+	private static StatisticsService statisticsService = new StatisticsService();
 	
 	public static UserAuthenticationService getUserAuthService() {
 		return userAuthService;

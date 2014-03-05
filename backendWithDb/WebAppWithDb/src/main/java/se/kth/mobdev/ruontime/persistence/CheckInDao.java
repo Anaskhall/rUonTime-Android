@@ -24,7 +24,7 @@ public class CheckInDao extends GenericDao<CheckIn> {
 	public List<CheckIn> getCheckInsForUser(String userName) {
 		List<CheckIn> result;
 		// query as string
-		String queryString = " from CheckIn as c where c.user.name = :name";
+		String queryString = " from CheckIn as c where c.associatedUser.userName = :name";
 
 		Session session = getSession();
 		session.getTransaction().begin();
