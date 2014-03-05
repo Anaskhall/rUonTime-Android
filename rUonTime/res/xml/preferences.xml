@@ -4,40 +4,71 @@
       <PreferenceCategory 
         android:title="General Settings"
         android:key="pref_key_general_settings">
-    
-    	<CheckBoxPreference
-        android:defaultValue="true"
+
+    	<SwitchPreference
+    	android:defaultValue="true"
         android:key="activateService"
-        android:summaryOff="The reminder service is inactive"
-        android:summaryOn="The reminder service is active"
-        android:title="Activate reminder service" />
+        android:switchTextOn="On"
+        android:switchTextOff="Off"
+        android:summary="Notification reminder"
+        android:title="Notification" />
     	
     	<EditTextPreference
-    	 android:title="Reminder"
+    	 android:title="Reminder time"
     	 android:defaultValue="15"
     	 android:inputType="number"
     	 android:key="reminder"
     	 android:summary="Minutes before reminder"/>
     	
-    	<CheckBoxPreference
+    	<SwitchPreference
         android:defaultValue="true"
         android:key="activateDigest"
-        android:summaryOff="The Digest service is inactive"
-        android:summaryOn="The Digest service is active"
-        android:title="Activate digest service" />
+        android:switchTextOn="On"
+        android:switchTextOff="Off"
+        android:summary="Delivers digest at intervals"
+        android:title="Digest service" />
     	
     	<ListPreference
     	    android:title="Digest"
     	    android:key="digest_list"
-    	    android:summary="Choose an option from the list"
+    	    
     	    android:entries="@array/list"
-    	    android:entryValues="@array/lValues"/>"
+    	    android:entryValues="@array/lValues"
+    	    android:defaultValue="1"/>
+    </PreferenceCategory>
+    
+      <PreferenceCategory 
+        android:title="Account Settings"
+        android:key="pref_key_account_settings">
+    	
+    	<Preference 
+    	    android:title="Log out"
+            android:key="log_out"
+            android:summary="Click to log out"/>
+    	
+    	<Preference 
+    	    android:title="Groups"
+            android:key="groups"
+            android:summary="Click to display groups"/>
+    	
+    	<Preference 
+    	    android:title="Drop a group"
+            android:key="drop"
+            android:summary="Choose the group to drop"/>
+    	
+            
     </PreferenceCategory>
     
     <PreferenceCategory 
-        android:title="Account Settings"
-        android:key="pref_key_account_settings">
-    	</PreferenceCategory>
+        android:title="Other Settings"
+        android:key="pref_key_other_settings">
+    	
+    	<Preference 
+    	    android:title="Change Calendar"
+            android:key="change"
+            android:summary="Change calendar"/>
+            
+    </PreferenceCategory>
     
 
 </PreferenceScreen>
