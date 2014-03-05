@@ -22,6 +22,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -70,16 +72,41 @@ public class Login extends Activity implements OnClickListener{
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.login_button:
+			if(!isNetworkConnected())
+			{
+				Toast.makeText(Login.this, "No internet!", Toast.LENGTH_LONG).show();
+			}
+			else
+			{
 			new AttemptLogin().execute();
+			}
+			//new AttemptLogin().execute();
 			break;
 		case R.id.register:
+			if(!isNetworkConnected())
+			{
+				Toast.makeText(Login.this, "No internet!", Toast.LENGTH_LONG).show();
+			}
+			else
+			{
 			Intent i = new Intent(this, Register.class);
 			startActivity(i);
+			}
 			break;
 		default:
 			break;
 		}
 	}
+	
+	private boolean isNetworkConnected() {
+		  ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		  NetworkInfo ni = cm.getActiveNetworkInfo();
+		  if (ni == null) {
+		   // There are no active networks.
+		   return false;
+		  } else
+		   return true;
+		 }
 	
 	class AttemptLogin extends AsyncTask<String, String, String> {
         @Override
